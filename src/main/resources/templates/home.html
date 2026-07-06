@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pay My Buddy</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+
+<div class="home-container">
+
+    <h1>Welcome to Pay My Buddy</h1>
+
+    <p>You are successfully authenticated.</p>
+
+    <form th:action="@{/logout}" method="post">
+
+        <button
+                class="primary-button"
+                type="submit">
+
+            Se déconnecter
+
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+
+</html>

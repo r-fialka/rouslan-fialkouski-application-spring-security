@@ -1,0 +1,213 @@
+/* ==========================================================
+   Global Styles
+   ========================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:Arial, Helvetica, sans-serif;
+    background:#FFFFFF;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    height:100vh;
+}
+
+/* ==========================================================
+   Login
+   ========================================================== */
+
+.login-container{
+
+    width:320px;
+
+    border:1px solid #D9D9D9;
+
+    border-radius:6px;
+
+    padding:40px;
+
+    background:#FFFFFF;
+
+}
+
+/* ---------------------------------------------------------- */
+
+.logo{
+
+    width:160px;
+
+    margin:0 auto 50px;
+
+    padding:12px;
+
+    text-align:center;
+
+    background:#F69C22;
+
+    color:#FFFFFF;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    border-radius:5px;
+
+}
+
+/* ---------------------------------------------------------- */
+
+.form-control{
+
+    width:100%;
+
+    padding:12px;
+
+    margin-bottom:15px;
+
+    border:1px solid #CFCFCF;
+
+    border-radius:5px;
+
+    font-size:15px;
+
+    outline:none;
+
+    transition:.2s;
+
+}
+
+.form-control:focus{
+
+    border-color:#2F80ED;
+
+}
+
+/* ---------------------------------------------------------- */
+
+.primary-button{
+
+    display:block;
+
+    width:150px;
+
+    margin:45px auto 20px;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:5px;
+
+    background:#2F80ED;
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    white-space:nowrap;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.primary-button:hover{
+
+    background:#1565C0;
+
+}
+
+/* ==========================================================
+   Messages
+   ========================================================== */
+
+.message{
+
+    padding:10px;
+
+    margin-bottom:20px;
+
+    text-align:center;
+
+    border-radius:5px;
+
+    font-size:14px;
+
+}
+
+.error{
+
+    background:#FDECEA;
+
+    color:#C62828;
+
+}
+
+.success{
+
+    background:#E8F5E9;
+
+    color:#2E7D32;
+
+}
+
+/* ==========================================================
+   Register Link
+   ========================================================== */
+
+.register-link{
+
+    text-align:center;
+
+    margin-top:20px;
+
+}
+
+.register-link a{
+
+    color:#2F80ED;
+
+    text-decoration:none;
+
+    font-size:14px;
+
+}
+
+.register-link a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* ==========================================================
+   Home Page
+   ========================================================== */
+
+.home-container{
+
+    text-align:center;
+
+}
+
+.home-container h1{
+
+    margin-bottom:20px;
+
+}
+
+.home-container p{
+
+    margin-bottom:40px;
+
+}
