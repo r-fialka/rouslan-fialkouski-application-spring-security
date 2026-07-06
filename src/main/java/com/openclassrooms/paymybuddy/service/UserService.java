@@ -20,15 +20,14 @@ public class UserService {
 
     public void save(User user) {
 
-        // Проверяем, существует ли уже пользователь с таким email
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new IllegalArgumentException("Email already exists.");
         }
 
-        // Шифруем пароль
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        // Сохраняем пользователя
         userRepository.save(user);
+
     }
+
 }
