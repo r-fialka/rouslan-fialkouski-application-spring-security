@@ -1,10 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
 <head>
+
     <meta charset="UTF-8">
-    <title>Add-Relation</title>
+    <title>Ajouter une relation</title>
+
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/add-relation.css}">
+
 </head>
+
 <body>
-    <h1>Add-Relation</h1>
+
+<div class="page">
+
+    <nav class="navbar">
+
+        <div class="logo-nav">
+            Pay My Buddy
+        </div>
+
+        <div class="menu">
+
+            <a th:href="@{/home}">Transférer</a>
+
+            <a th:href="@{/profile}">Profil</a>
+
+            <a class="active"
+               th:href="@{/add-relation}">
+                Ajouter relation
+            </a>
+
+            <form th:action="@{/logout}" method="post">
+
+                <button class="logout-button">
+                    Se déconnecter
+                </button>
+
+            </form>
+
+        </div>
+
+    </nav>
+
+    <div class="relation-container">
+
+        <h2>Chercher une relation</h2>
+
+        <div th:if="${success}" class="success-message">
+
+            <span th:text="${success}"></span>
+
+        </div>
+
+        <div th:if="${error}" class="error-message">
+
+            <span th:text="${error}"></span>
+
+        </div>
+
+        <form th:action="@{/add-relation}" method="post">
+
+            <input
+
+                    class="form-control"
+
+                    type="email"
+
+                    name="email"
+
+                    placeholder="Saisir une adresse mail"
+
+                    required>
+
+            <button
+
+                    class="orange-button"
+
+                    type="submit">
+
+                Ajouter
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
 </body>
+
 </html>

@@ -2,9 +2,12 @@ package com.openclassrooms.paymybuddy.controller;
 
 import com.openclassrooms.paymybuddy.model.User;
 import com.openclassrooms.paymybuddy.service.UserService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -15,33 +18,21 @@ public class UserController {
         this.userService = userService;
     }
 
-    /**
-     * Redirect root URL to the custom login page.
-     */
     @GetMapping("/")
-    public String index() {
-        return "redirect:/login";
-    }
-
-    /**
-     * Display the custom login page.
-     */
-    @GetMapping("/login")
     public String login() {
         return "login";
     }
 
-    /**
-     * Display the registration page.
-     */
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";
+    }
+
     @GetMapping("/register")
     public String registerPage() {
         return "register";
     }
 
-    /**
-     * Save a new user.
-     */
     @PostMapping("/register")
     public String register(User user) {
 
@@ -50,27 +41,37 @@ public class UserController {
         return "redirect:/login";
     }
 
-    /**
-     * Home page after successful authentication.
-     */
-    @GetMapping("/home")
-    public String home() {
-        return "home";
-    }
-
-    /**
-     * User profile page.
-     */
     @GetMapping("/profile")
     public String profile() {
         return "profile";
     }
 
-    /**
-     * Add relation page.
-     */
     @GetMapping("/add-relation")
-    public String addRelation() {
+    public String addRelationPage() {
+
         return "add-relation";
     }
+
+    @PostMapping("/add-relation")
+    public String addRelation(Authentication authentication,
+                              @RequestParam String email,
+                              Model model) {
+
+        try {
+
+            userService.addConnection(authentication.getName(), email);
+
+            model.addAttribute("success",
+                    "Relation ajoutée avec succès.");
+
+        } catch (IllegalArgumentException e) {
+
+            model.addAttribute("error",
+                    e.getMessage());
+
+        }
+
+        return "add-relation";
+    }
+
 }

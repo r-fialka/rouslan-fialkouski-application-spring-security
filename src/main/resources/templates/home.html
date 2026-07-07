@@ -8,29 +8,162 @@
 
     <title>Pay My Buddy</title>
 
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
 
 </head>
 
 <body>
 
-<div class="home-container">
+<div class="page">
 
-    <h1>Welcome to Pay My Buddy</h1>
+    <!-- ================= Navigation ================= -->
 
-    <p>You are successfully authenticated.</p>
+    <nav class="navbar">
 
-    <form th:action="@{/logout}" method="post">
+        <div class="logo-nav">
+            Pay My Buddy
+        </div>
 
-        <button
-                class="primary-button"
-                type="submit">
+        <div class="menu">
 
-            Se déconnecter
+            <a class="active"
+               th:href="@{/home}">
+                Transférer
+            </a>
 
-        </button>
+            <a th:href="@{/profile}">
+                Profil
+            </a>
 
-    </form>
+            <a th:href="@{/add-relation}">
+                Ajouter relation
+            </a>
+
+            <form th:action="@{/logout}" method="post">
+
+                <button
+                        class="logout-button"
+                        type="submit">
+
+                    Se déconnecter
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </nav>
+
+    <!-- ================= Transfer ================= -->
+
+    <div class="transfer-container">
+
+        <form class="transfer-form"
+              th:action="@{/transfer}"
+              method="post">
+
+            <select
+                    class="transfer-select"
+                    name="receiverId"
+                    required>
+
+                <option value="">
+                    Sélectionner une relation
+                </option>
+
+                <option
+                        th:each="connection : ${connections}"
+                        th:value="${connection.id}"
+                        th:text="${connection.userName}">
+                </option>
+
+            </select>
+
+            <input
+
+                    class="transfer-description"
+
+                    type="text"
+
+                    name="description"
+
+                    placeholder="Description"
+
+                    required>
+
+            <input
+
+                    class="transfer-amount"
+
+                    type="number"
+
+                    name="amount"
+
+                    min="0.01"
+
+                    step="0.01"
+
+                    placeholder="0.00"
+
+                    required>
+
+            <button
+
+                    class="pay-button"
+
+                    type="submit">
+
+                Payer
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- ================= Transactions ================= -->
+
+    <div class="transactions-card">
+
+        <h2>
+
+            Mes Transactions
+
+        </h2>
+
+        <table class="transactions-table">
+
+            <thead>
+
+            <tr>
+
+                <th>Relations</th>
+                <th>Description</th>
+                <th>Montant</th>
+
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            <tr th:each="transaction : ${transactions}">
+
+                <td th:text="${transaction.receiver.userName}"></td>
+
+                <td th:text="${transaction.description}"></td>
+
+                <td th:text="${transaction.amount} + ' €'"></td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
 
 </div>
 
