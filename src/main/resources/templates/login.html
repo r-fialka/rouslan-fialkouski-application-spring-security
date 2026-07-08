@@ -4,9 +4,11 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Pay My Buddy</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Pay My Buddy</title>
 
     <link rel="stylesheet" th:href="@{/css/common.css}">
     <link rel="stylesheet" th:href="@{/css/login.css}">
@@ -17,40 +19,67 @@
 
 <div class="login-container">
 
+    <!-- ================= Logo ================= -->
+
     <div class="logo">
+
         Pay My Buddy
+
     </div>
 
-    <!-- Error Message -->
-    <div th:if="${param.error}" class="message error">
+    <!-- ================= Messages ================= -->
+
+    <div th:if="${param.error}"
+         class="message error">
+
         Invalid username or password.
+
     </div>
 
-    <!-- Logout Message -->
-    <div th:if="${param.logout}" class="message success">
+    <div th:if="${param.logout}"
+         class="message success">
+
         You have been logged out successfully.
+
     </div>
 
-    <form th:action="@{/login}" method="post">
+    <!-- ================= Login Form ================= -->
+
+    <form th:action="@{/login}"
+          method="post">
 
         <input
+
                 class="form-control"
+
                 type="text"
+
                 name="username"
+
                 placeholder="Mail"
+
                 autocomplete="username"
+
                 required>
 
         <input
+
                 class="form-control"
+
                 type="password"
+
                 name="password"
+
                 placeholder="Mot de passe"
+
                 autocomplete="current-password"
+
                 required>
 
         <button
+
                 class="primary-button"
+
                 type="submit">
 
             Se connecter
@@ -59,10 +88,14 @@
 
     </form>
 
+    <!-- ================= Registration ================= -->
+
     <div class="register-link">
 
         <a th:href="@{/register}">
+
             Create an account
+
         </a>
 
     </div>

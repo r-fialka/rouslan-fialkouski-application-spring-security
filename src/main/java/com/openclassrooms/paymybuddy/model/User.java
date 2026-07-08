@@ -20,6 +20,9 @@ import lombok.Setter;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Represents an application user.
+ */
 @Entity
 @Table(name = "user")
 

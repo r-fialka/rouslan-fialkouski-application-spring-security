@@ -2,10 +2,22 @@ package com.openclassrooms.paymybuddy.model;
 
 import jakarta.persistence.*;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.sql.Timestamp;
 
+/**
+ * Represents a money transfer between two users.
+ */
 @Entity
 @Table(name = "transactions")
+
+@Getter
+@Setter
+@NoArgsConstructor
+
 public class Transaction {
 
     @Id
@@ -26,49 +38,11 @@ public class Transaction {
     @Column(name = "amount", nullable = false)
     private Double amount;
 
-    @Column(name = "created_at", insertable = false, updatable = false)
+    @Column(
+            name = "created_at",
+            insertable = false,
+            updatable = false
+    )
     private Timestamp createdAt;
 
-    public Transaction() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public User getSender() {
-        return sender;
-    }
-
-    public void setSender(User sender) {
-        this.sender = sender;
-    }
-
-    public User getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(User receiver) {
-        this.receiver = receiver;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
 }

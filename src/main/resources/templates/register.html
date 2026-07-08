@@ -4,7 +4,9 @@
 <head>
 
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
   <title>Register - Pay My Buddy</title>
 
@@ -17,35 +19,59 @@
 
 <div class="login-container">
 
+  <!-- ================= Logo ================= -->
+
   <div class="logo">
+
     Pay My Buddy
+
   </div>
 
-  <form th:action="@{/register}" method="post">
+  <!-- ================= Registration Form ================= -->
+
+  <form th:action="@{/register}"
+        method="post">
 
     <input
+
             class="form-control"
+
             type="text"
+
             name="userName"
+
             placeholder="Username"
+
             required>
 
     <input
+
             class="form-control"
+
             type="email"
+
             name="email"
+
             placeholder="Mail"
+
             required>
 
     <input
+
             class="form-control"
+
             type="password"
+
             name="password"
+
             placeholder="Mot de passe"
+
             required>
 
     <button
+
             class="primary-button"
+
             type="submit">
 
       S'inscrire

@@ -13,8 +13,11 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class SpringSecurityConfig {
+public class SecurityConfig {
 
+    /**
+     * Configure application security.
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -28,11 +31,13 @@ public class SpringSecurityConfig {
                                 "/register",
                                 "/css/**",
                                 "/images/**",
-                                "/js/**")
+                                "/js/**"
+                        )
                         .permitAll()
 
                         .anyRequest()
                         .authenticated()
+
                 )
 
                 .formLogin(form -> form
@@ -54,8 +59,12 @@ public class SpringSecurityConfig {
                 );
 
         return http.build();
+
     }
 
+    /**
+     * Configure DAO authentication provider.
+     */
     @Bean
     public DaoAuthenticationProvider authenticationProvider(
             CustomUserDetailsService customUserDetailsService) {
@@ -66,15 +75,23 @@ public class SpringSecurityConfig {
         provider.setPasswordEncoder(passwordEncoder());
 
         return provider;
+
     }
 
+    /**
+     * Configure authentication manager.
+     */
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration configuration) throws Exception {
 
         return configuration.getAuthenticationManager();
+
     }
 
+    /**
+     * Password encoder used to hash user passwords.
+     */
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
 

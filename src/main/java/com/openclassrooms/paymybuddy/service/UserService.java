@@ -8,6 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 
+/**
+ * Provides user management and profile operations.
+ */
 @Service
 public class UserService {
 
@@ -19,12 +22,13 @@ public class UserService {
 
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+
     }
 
     /**
-     * Registration
+     * Register a new user.
      */
-    public void save(User user) {
+    public void register(User user) {
 
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new IllegalArgumentException("Email already exists.");
@@ -33,28 +37,23 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepository.save(user);
+
     }
 
     /**
-     * Add friend
+     * Add a new connection.
      */
     @Transactional
-    public void addConnection(String currentUserEmail, String friendEmail) {
+    public void addConnection(String currentUserEmail,
+                              String friendEmail) {
 
-        User currentUser = userRepository.findByEmail(currentUserEmail)
-                .orElseThrow(() ->
-                        new IllegalArgumentException("Current user not found."));
+        User currentUser = findUserByEmail(currentUserEmail);
+        User friend = findUserByEmail(friendEmail);
 
-        User friend = userRepository.findByEmail(friendEmail)
-                .orElseThrow(() ->
-                        new IllegalArgumentException("User not found."));
-
-        // Нельзя добавить самого себя
         if (currentUser.getId().equals(friend.getId())) {
             throw new IllegalArgumentException("You cannot add yourself.");
         }
 
-        // Уже есть в друзьях
         if (currentUser.getConnections().contains(friend)) {
             throw new IllegalArgumentException("Connection already exists.");
         }
@@ -62,18 +61,83 @@ public class UserService {
         currentUser.getConnections().add(friend);
 
         userRepository.save(currentUser);
+
     }
 
+    /**
+     * Return all user connections.
+     */
     @Transactional(readOnly = true)
     public Set<User> getConnections(String email) {
 
-        User user = userRepository.findByEmail(email)
+        User user = findUserByEmail(email);
+
+        // Initialize lazy collection.
+        user.getConnections().size();
+
+        return user.getConnections();
+
+    }
+
+    /**
+     * Return a user by email.
+     */
+    @Transactional(readOnly = true)
+    public User getUserByEmail(String email) {
+
+        return findUserByEmail(email);
+
+    }
+
+    /**
+     * Update profile information.
+     */
+    @Transactional
+    public void updateProfile(String currentEmail,
+                              String userName,
+                              String email,
+                              String password,
+                              String confirmPassword) {
+
+        User user = findUserByEmail(currentEmail);
+
+        // Validate email.
+        if (!user.getEmail().equals(email)
+                && userRepository.findByEmail(email).isPresent()) {
+
+            throw new IllegalArgumentException("Email already exists.");
+
+        }
+
+        // Validate password.
+        if (password != null && !password.isBlank()) {
+
+            if (!password.equals(confirmPassword)) {
+
+                throw new IllegalArgumentException("Passwords do not match.");
+
+            }
+
+            user.setPassword(passwordEncoder.encode(password));
+
+        }
+
+        user.setUserName(userName);
+        user.setEmail(email);
+
+        userRepository.save(user);
+
+    }
+
+    /**
+     * Find a user by email.
+     */
+    private User findUserByEmail(String email) {
+
+        return userRepository.findByEmail(email)
                 .orElseThrow(() ->
                         new IllegalArgumentException("User not found."));
 
-        user.getConnections().size();   // принудительная инициализация
-
-        return user.getConnections();
     }
 
 }

@@ -1,0 +1,285 @@
+/* ==========================================================
+   PROFILE PAGE
+   ========================================================== */
+
+/* ---------- Page ---------- */
+
+.page {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+}
+
+/* ---------- Navigation ---------- */
+
+.navbar {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 45px 50px;
+
+}
+
+.logo-nav {
+
+    font-size: 26px;
+
+    font-weight: 500;
+
+}
+
+.menu {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 35px;
+
+}
+
+.menu a {
+
+    color: #000000;
+
+    text-decoration: none;
+
+    font-size: 16px;
+
+}
+
+.menu a.active {
+
+    color: #2F80ED;
+
+    font-weight: bold;
+
+}
+
+.logout-button {
+
+    background: none;
+
+    border: none;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+}
+
+/* ---------- Profile ---------- */
+
+.profile-container {
+
+    width: 420px;
+
+    margin: 120px auto;
+
+}
+
+.profile-container h2 {
+
+    margin-bottom: 30px;
+
+    font-size: 22px;
+
+    font-weight: normal;
+
+}
+
+.profile-container form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+
+}
+
+/* ---------- Form ---------- */
+
+.form-control {
+
+    width: 100%;
+
+    height: 48px;
+
+    padding: 12px;
+
+    border: 1px solid #CFCFCF;
+
+    border-radius: 5px;
+
+    font-size: 15px;
+
+    outline: none;
+
+    box-sizing: border-box;
+
+}
+
+.form-control:focus {
+
+    border-color: #2F80ED;
+
+}
+
+/* ---------- Button ---------- */
+
+.primary-button {
+
+    width: 100%;
+
+    height: 48px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: #F69C22;
+
+    color: #FFFFFF;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+.primary-button:hover {
+
+    background: #E58A0F;
+
+}
+
+/* ---------- Messages ---------- */
+
+.success-message {
+
+    background: #D4EDDA;
+
+    color: #155724;
+
+    border: 1px solid #C3E6CB;
+
+    padding: 12px;
+
+    border-radius: 5px;
+
+    margin-bottom: 20px;
+
+    text-align: center;
+
+}
+
+.error-message {
+
+    background: #F8D7DA;
+
+    color: #721C24;
+
+    border: 1px solid #F5C6CB;
+
+    padding: 12px;
+
+    border-radius: 5px;
+
+    margin-bottom: 20px;
+
+    text-align: center;
+
+}
+
+/* ==========================================================
+   PASSWORD TOGGLE
+   ========================================================== */
+
+.password-wrapper {
+
+    position: relative;
+
+    width: 100%;
+
+}
+
+.password-input {
+
+    padding-right: 52px;
+
+}
+
+/* ---------- Toggle Button ---------- */
+
+.toggle-password {
+
+    position: absolute;
+
+    top: 50%;
+
+    right: 14px;
+
+    transform: translateY(-50%);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 24px;
+
+    height: 24px;
+
+    border: none;
+
+    background: transparent;
+
+    padding: 0;
+
+    cursor: pointer;
+
+    color: #808080;
+
+    transition: color .2s;
+
+}
+
+.toggle-password:hover {
+
+    color: #2F80ED;
+
+}
+
+.toggle-password svg {
+
+    width: 22px;
+
+    height: 22px;
+
+}
+
+/* ---------- Icons ---------- */
+
+.eye-open {
+
+    display: none;
+
+}
+
+.eye-closed {
+
+    display: block;
+
+}

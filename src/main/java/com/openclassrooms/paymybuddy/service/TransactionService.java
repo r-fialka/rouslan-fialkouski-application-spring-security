@@ -9,6 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Provides transaction management operations.
+ */
 @Service
 public class TransactionService {
 
@@ -20,37 +23,49 @@ public class TransactionService {
 
         this.transactionRepository = transactionRepository;
         this.userRepository = userRepository;
+
     }
 
+    /**
+     * Return all transactions for the authenticated user.
+     */
+    @Transactional(readOnly = true)
     public List<Transaction> getTransactions(String email) {
 
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() ->
-                        new IllegalArgumentException("User not found."));
+        return transactionRepository.findBySenderOrderByIdDesc(
+                findUserByEmail(email)
+        );
 
-        return transactionRepository.findBySenderOrderByIdDesc(user);
     }
 
+    /**
+     * Create a new transaction.
+     */
     @Transactional
-    public void saveTransaction(String senderEmail,
-                                Integer receiverId,
-                                String description,
-                                Double amount) {
+    public void createTransaction(String senderEmail,
+                                  Integer receiverId,
+                                  String description,
+                                  Double amount) {
 
-        User sender = userRepository.findByEmail(senderEmail)
-                .orElseThrow(() ->
-                        new IllegalArgumentException("Sender not found."));
+        User sender = findUserByEmail(senderEmail);
+        User receiver = findUserById(receiverId);
 
-        User receiver = userRepository.findById(receiverId)
-                .orElseThrow(() ->
-                        new IllegalArgumentException("Receiver not found."));
-
+        // Prevent transfers to the same user.
         if (sender.getId().equals(receiver.getId())) {
-            throw new IllegalArgumentException("You cannot send money to yourself.");
+
+            throw new IllegalArgumentException(
+                    "You cannot send money to yourself."
+            );
+
         }
 
+        // Validate transfer amount.
         if (amount == null || amount <= 0) {
-            throw new IllegalArgumentException("Amount must be greater than zero.");
+
+            throw new IllegalArgumentException(
+                    "Amount must be greater than zero."
+            );
+
         }
 
         Transaction transaction = new Transaction();
@@ -61,6 +76,29 @@ public class TransactionService {
         transaction.setAmount(amount);
 
         transactionRepository.save(transaction);
+
+    }
+
+    /**
+     * Find a user by email.
+     */
+    private User findUserByEmail(String email) {
+
+        return userRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new IllegalArgumentException("User not found."));
+
+    }
+
+    /**
+     * Find a user by id.
+     */
+    private User findUserById(Integer id) {
+
+        return userRepository.findById(id)
+                .orElseThrow(() ->
+                        new IllegalArgumentException("User not found."));
+
     }
 
 }
