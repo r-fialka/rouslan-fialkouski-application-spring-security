@@ -14,8 +14,9 @@ public interface TransactionRepository
         extends JpaRepository<Transaction, Integer> {
 
     /**
-     * Return all transactions sent by a user.
-     * The receiver is loaded eagerly to avoid LazyInitializationException.
+     * Returns all transactions sent by a user.
+     * The receiver association is fetched using JOIN FETCH
+     * to avoid LazyInitializationException.
      *
      * @param sender the transaction sender
      * @return the list of transactions ordered by newest first
